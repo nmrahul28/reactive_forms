@@ -1,0 +1,45 @@
+<form [formGroup]="user_data" (ngSubmit)="onSubmit()">
+  <h1>Enter Employee Details</h1>
+  <div class="div_class">
+    <label>Employee Name:</label><br>
+    <input type="text" formControlName="employee_name" placeholder="Name">
+  <div style="color:red" *ngIf="(user_data.controls.employee_name.dirty || user_data.controls.employee_name.touched) && user_data.controls.employee_name.errors.required">
+    Name is required.
+  </div>
+  <div style="color:red" *ngIf="user_data.controls.employee_name.errors.minlength">
+    Name must be at least 5 characters long.
+  </div>
+    <br>
+    <label>Email:</label><br>
+    <input type="text" formControlName="email" placeholder="email">
+    <div style="color:red" *ngIf="(user_data.controls.email.dirty || user_data.controls.email.touched) && user_data.controls.email.errors.required">
+        Email is required.
+    </div>
+    <div *ngIf="(user_data.controls.email.dirty ||user_data.controls.email.touched) && user_data.controls.email.invalid && user_data.controls.email.errors.invalidEmail">
+    Value has to be a valid email address.
+    </div>
+    <br>
+    <label>Contact Number:</label><br>
+    <input type="number" formControlName="phone" placeholder="Mobile number">
+    <div style="color: red" *ngIf="(user_data.controls.phone.dirty || user_data.controls.phone.touched) && user_data.controls.phone.invalid && user_data.controls.phone.errors.required">
+        Mobile Number is required.
+    </div>
+    <div style="color: red"*ngIf="user_data.controls.phone.errors.minlength">
+      Maxmium numbers are 10.
+    </div>
+      <div style="color: red" *ngIf="user_data.controls.phone.invalid && user_data.controls.phone.errors.invalidNumber">
+        Value has to be a number.
+      </div>
+    <br>
+    <label>ID:</label><br>
+    <input type="text" formControlName="employee_id" placeholder="id"><br>
+    <div formGroupName="address">
+      <label>Address:</label><br>
+      <input type="text" formControlName="street_name" placeholder="street"><br><br>
+      <input type="text" formControlName="city_name" placeholder="city"><br><br>
+      <input type="text" formControlName="state_name" placeholder="state"><br><br>
+      <input type="text" formControlName="zip" placeholder="zip"><br><br>
+    </div>
+    <button type="submit" [disabled]="!user_data.valid">Submit</button>
+  </div>
+</form>
