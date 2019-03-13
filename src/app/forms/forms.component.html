@@ -24,7 +24,7 @@
   </div>
     <br>
     <label>Contact Number:</label><br>
-    <input type="text" formControlName="phone" placeholder="Mobile number">
+    <input type="tel" formControlName="phone" placeholder="Mobile number">
     <div *ngIf="(user_data.controls.phone.dirty || user_data.controls.phone.touched) && user_data.controls.phone.invalid">
     <div style="color: red" *ngIf="user_data.controls.phone.errors.required">
         Mobile Number is required.
@@ -32,13 +32,16 @@
     <div style="color: red"*ngIf="user_data.controls.phone.errors.minlength ||user_data.controls.phone.errors.maxlength">
         Length should be of 10 characters.
       </div>
+      <div style="color:goldenrod"*ngIf="user_data.controls.phone.errors.pattern">
+        Should be Number.
+      </div>
   </div>
     <br>
     <label>ID:</label><br>
     <input type="text" formControlName="employee_id" placeholder="id">
     <div *ngIf="(user_data.controls.employee_id.dirty || user_data.controls.employee_id.touched) && user_data.controls.employee_id.invalid">
         <div style="color: red" *ngIf="user_data.controls.employee_id.errors.required">
-            Mobile Number is required.
+            Employee id is required.
         </div>
         <div style="color: red"*ngIf="user_data.controls.employee_id.errors.minlength || user_data.controls.employee_id.errors.maxlength">
             Length should be of 4 characters.
@@ -47,10 +50,39 @@
     <br>
     <div formGroupName="address">
       <label>Address:</label><br>
-      <input type="text" formControlName="street_name" placeholder="street"><br><br>
-      <input type="text" formControlName="city_name" placeholder="city"><br><br>
-      <input type="text" formControlName="state_name" placeholder="state"><br><br>
-      <input type="text" formControlName="zip" placeholder="zip">
+      <input type="text" formControlName="street_name" placeholder="street">
+      <div *ngIf="(control.address.controls.street_name.dirty ||control.address.controls.street_name.touched) && control.address.controls.street_name.invalid">
+        <div style="color: red" *ngIf="control.address.controls.street_name.errors.required">
+            street field is required.
+        </div>
+        </div>
+      <br><br>
+      <input type="text" formControlName="city_name" placeholder="city">
+      <div *ngIf="(control.address.controls.city_name.dirty ||control.address.controls.city_name.touched) && control.address.controls.city_name.invalid">
+        <div style="color: red" *ngIf="control.address.controls.city_name.errors.required">
+            city field is required.
+        </div>
+        </div>
+      <br><br>
+      <input type="text" formControlName="state_name" placeholder="state">
+      <div *ngIf="(control.address.controls.state_name.dirty ||control.address.controls.state_name.touched) && control.address.controls.state_name.invalid">
+        <div style="color: red" *ngIf="control.address.controls.state_name.errors.required">
+            state field is required.
+        </div>
+        </div>
+      <br><br>
+      <input type="tel" formControlName="zip" placeholder="zip">
+      <div *ngIf="(control.address.controls.zip.dirty ||control.address.controls.zip.touched) && control.address.controls.zip.invalid">
+          <div style="color: red" *ngIf="control.address.controls.zip.errors.required">
+              zip code is required.
+          </div>
+          <div style="color: red"*ngIf="control.address.controls.zip.errors.minlength || control.address.controls.zip.errors.maxlength">
+              Length should be of 6 characters.
+            </div>
+            <div style="color:goldenrod"*ngIf="control.address.controls.zip.errors.pattern">
+              Should be Number.
+            </div>
+        </div>
       <br><br>
     </div>
     <button type="submit" [disabled]="!user_data.valid">Submit</button>
